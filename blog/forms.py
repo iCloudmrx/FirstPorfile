@@ -3,5 +3,6 @@ from .models import Contact
 
 
 class ContactForm(forms.ModelForm):
-    models = Contact
-    fields = '__all__'
+    class Meta:
+        model = Contact
+        fields = '__all__'

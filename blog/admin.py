@@ -8,7 +8,7 @@ app_name = 'blog'
 
 @admin.register(Post)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ['title', 'publish', 'status']
+    list_display = ['title', 'category', 'publish', 'status']
     list_filter = ['title', 'category', 'publish', 'created']
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'publish'

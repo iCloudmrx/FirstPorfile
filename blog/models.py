@@ -21,7 +21,8 @@ class Post(models.Model):
         Published = 'PB', 'PUBLISHED'
 
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250)
+    slug = models.SlugField(max_length=250,
+                            unique_for_date='publish')
     body = models.TextField()
     image = models.ImageField(upload_to='news/images')
     category = models.ForeignKey(Category,
@@ -43,7 +44,10 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("post_detail", kwargs={"pk": self.pk})
+        return reverse("blog:post_detail", args=[self.publish.year,
+                                                 self.publish.month,
+                                                 self.publish.day,
+                                                 self.slug])
 
 
 class Contact(models.Model):
