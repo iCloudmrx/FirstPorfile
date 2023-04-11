@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404, render
 from .models import Post, Category
@@ -44,6 +45,18 @@ def post_contact(request):
         form.save()
     return render(request,
                   'blog/post/pages/contact.html',
+                  {
+                      'form': form
+                  })
+
+
+def register(request):
+    form = ContactForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return HttpResponse("Siz ro'yxatdan o'tdingiz")
+    return render(request,
+                  'blog/post/pages/register.html',
                   {
                       'form': form
                   })
