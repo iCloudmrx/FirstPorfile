@@ -8,5 +8,6 @@ urlpatterns = [
     path('404/', ContactView.as_view(), name='404'),
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',
          post_detail,
-         name='post_detail')
+         name='post_detail'),
+    path('uz/Mahalliy/', localView, name='local'),
 ]

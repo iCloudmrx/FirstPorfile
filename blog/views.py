@@ -6,13 +6,6 @@ from .forms import ContactForm
 # Create your views here.
 
 
-def post_list(request):
-    posts = Post.published.all().order_by('-publish')
-    return render(request,
-                  'blog/post/list.html',
-                  {'posts': posts})
-
-
 def post_index(request):
     last_posts = Post.published.all().order_by('-publish')[:5]
     local_posts = Post.published.all().order_by(
@@ -92,3 +85,12 @@ class ContactView(TemplateView):
         return render(request, 'blog/post/pages/contact.html', {
             'form': form
         })
+
+
+def localView(request):
+    posts = Post.published.all().order_by(
+        '-publish').filter(category__name='Mahalliy')[:10]
+    return render(request, 'blog/post/pages/local.html',
+                  {
+                      'posts': posts,
+                  })
