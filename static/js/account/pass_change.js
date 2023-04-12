@@ -45,7 +45,7 @@ function validateSignupForm() {
         return false;
     }
 
-    onSignup();
+    // onSignup();
 }
 
 function onSignup() {
@@ -63,6 +63,6 @@ function onSignup() {
         }
     };
 
-    xhttp.open("GET", "ajax_info.txt", true);
-    xhttp.send();
+    // xhttp.open("GET", "ajax_info.txt", true);
+    // xhttp.send();
 }
