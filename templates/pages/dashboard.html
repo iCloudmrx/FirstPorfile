@@ -1,0 +1,5 @@
+{% extends 'blog/base.html' %}<!---->
+{% block title %} Foydalanuvchi profil {% endblock title %}<!---->
+{% block content %} Xush kelibsiz, {{user.username}}
+<p><a href="{% url 'accounts:password_change' %}">Password o'zgartirish</a></p>
+{% endblock content %}

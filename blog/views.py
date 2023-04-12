@@ -50,18 +50,6 @@ def post_contact(request):
                   })
 
 
-def register(request):
-    form = ContactForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        form.save()
-        return HttpResponse("Siz ro'yxatdan o'tdingiz")
-    return render(request,
-                  'blog/post/pages/register.html',
-                  {
-                      'form': form
-                  })
-
-
 def post_404(request):
     return render(request,
                   'blog/post/pages/404.html')

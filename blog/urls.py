@@ -10,5 +10,4 @@ urlpatterns = [
          post_detail,
          name='post_detail'),
     path('uz/Mahalliy/', localView, name='local'),
-    path('register', register, name='register')
 ]

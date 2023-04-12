@@ -25,9 +25,3 @@ class CategoryAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'message']
     list_filter = ['name', 'email']
-
-
-@admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email']
-    search_fields = ['username', 'email']

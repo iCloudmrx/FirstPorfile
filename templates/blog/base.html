@@ -82,6 +82,22 @@
                                 </ul>
                             </div>
                             <div class="header_top_right">
+                                {% if request.user.is_authenticated %}
+                                <p>
+                                    <a
+                                        href="{% url 'accounts:dashboard' %}"
+                                        style="color: white"
+                                        class="top_nav"
+                                        >MY profile</a
+                                    >
+                                </p>
+                                {% else %}
+                                <p style="color: white">
+                                    <a href="{% url 'accounts:login' %}"
+                                        >Login</a
+                                    >
+                                </p>
+                                {% endif %}
                                 <p>Friday, December 05, 2045</p>
                             </div>
                         </div>

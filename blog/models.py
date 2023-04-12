@@ -58,13 +58,3 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email
-
-
-class Customer(models.Model):
-    username = models.CharField(max_length=30, unique=True)
-    email = models.EmailField(unique=True, blank=False, max_length=254)
-    password = models.CharField(max_length=16)
-    c_password = models.CharField(max_length=16)
-
-    def __str__(self):
-        return self.username
