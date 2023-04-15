@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8" />
+        <!---<title> Responsive Registration Form | CodingLab </title>--->
+        <link rel="stylesheet" href="{% static 'css/account/style.css'%}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div class="wrapper">
+            <h2>Registration</h2>
+            <form action="" method="POST" novalidate enctype="multipart/form-data">
+                {% csrf_token %} {% for field in user_form %}
+                <div class="input-box">
+                    {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %} {{ field.label_tag }} {{ field }}
+                </div>
+                {% endfor %} {% for field in profile_form %}
+                <div class="input-box">
+                    {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %} {{ field.label_tag }} {{ field }}
+                </div>
+                {% endfor %}
+                <div class="input-box button">
+                    <input type="submit" value="Register Now" />
+                </div>
+                <div class="text">
+                    <h3>Already have an account? <a href="{% url 'accounts:login' %}">Login now</a></h3>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
