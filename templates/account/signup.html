@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8" />
+        <!---<title> Responsive Registration Form | CodingLab </title>--->
+        <link rel="stylesheet" href="{% static 'css/account/style.css'%}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <style>
+        .input-box {
+            margin-top: 20px;
+        }
+    </style>
+    <body>
+        <div class="wrapper">
+            <h2>Registration</h2>
+            <form action="" method="POST" novalidate>
+                {% csrf_token %} {% comment %}
+                <div class="input-box">
+                    <input type="text" placeholder="Enter your username" required name="username" />
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Enter your email" required name="email" />
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Create password" required name="passwrod" />
+                </div>
+                {% endcomment %} {% for field in form %}
+                <div class="input-box">
+                    {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %} {{ field.label_tag }} {{ field }}
+                </div>
+                {% endfor %}
+                <div class="input-box button">
+                    <input type="submit" value="Register Now" />
+                </div>
+                <div class="text">
+                    <h3>Already have an account? <a href="{% url 'accounts:login' %}">Login now</a></h3>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

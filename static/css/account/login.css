@@ -73,7 +73,7 @@ form .field input:valid ~ label {
     top: 0%;
     font-size: 16px;
     color: #4158d0;
-    background: #fff;
+    background: #e8f0fe;
     transform: translateY(-50%);
 }
 form .content {

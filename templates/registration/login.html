@@ -6,10 +6,7 @@
         <meta charset="UTF-8" />
         <!---<title> Responsive Login Form | CodingLab </title>--->
         <link rel="stylesheet" href="{% static 'css/account/login.css' %}" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
@@ -31,7 +28,7 @@
                         <label for="remember-me">Remember me</label>
                     </div>
                     <div class="pass-link">
-                        <a href="#">Forgot password?</a>
+                        <a href="{% url 'accounts:password_reset' %}">Forgot password?</a>
                     </div>
                 </div>
                 <div class="field">
