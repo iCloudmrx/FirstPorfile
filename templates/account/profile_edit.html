@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <h2>Registration</h2>
+            <h2>Profile Edit</h2>
             <form action="" method="POST" novalidate enctype="multipart/form-data">
                 {% csrf_token %} {% for field in user_form %}
                 <div class="input-box">
@@ -34,10 +34,7 @@
                 </div>
                 {% endfor %}
                 <div class="input-box button">
-                    <input type="submit" value="Register Now" />
-                </div>
-                <div class="text">
-                    <h3>Already have an account? <a href="{% url 'accounts:login' %}">Login now</a></h3>
+                    <input type="submit" value="Edit Now" />
                 </div>
             </form>
         </div>

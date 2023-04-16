@@ -10,4 +10,5 @@ urlpatterns = [
          post_detail,
          name='post_detail'),
     path('uz/Mahalliy/', localView, name='local'),
+    path('adminpage', admin_page, name='admin_page')
 ]

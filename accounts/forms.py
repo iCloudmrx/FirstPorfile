@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Profile
 
 
 class SignUpForm(forms.ModelForm):
@@ -28,5 +29,5 @@ class UserEditForm(forms.ModelForm):
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = Profile
         fields = ['date_of_birth', 'photo']

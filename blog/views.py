@@ -1,8 +1,11 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404, render
 from .models import Post, Category
 from .forms import ContactForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
 
@@ -39,6 +42,7 @@ def post_index(request):
                   })
 
 
+@login_required
 def post_contact(request):
     form = ContactForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
@@ -70,7 +74,7 @@ def post_detail(request, year, month, day, post):
                   })
 
 
-class ContactView(TemplateView):
+class ContactView(LoginRequiredMixin, TemplateView):
     form = ContactForm()
 
     def get(self, request, *args, **kwargs):
@@ -95,3 +99,12 @@ def localView(request):
                   {
                       'posts': posts,
                   })
+
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def admin_page(request):
+    admin_users = User.objects.filter(is_superuser=True)
+    return render(request, 'admin/page.html', {
+        'users': admin_users
+    })

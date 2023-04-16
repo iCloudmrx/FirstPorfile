@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Panel</title>
+    </head>
+    <body>
+        <h1>Barcha adminlar</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Date of birth</th>
+                    <th>Photo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <th>{{user.username}}</th>
+                    <th>{{user.first_name}}</th>
+                    <th>{{user.last_name}}</th>
+                    <th>{{user.profile.date_of_birth}}</th>
+                    <th>{{user.profile.photo.url}}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

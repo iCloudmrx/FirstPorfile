@@ -1,7 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.views import View
 
 from accounts.models import Profile
 from .forms import *
@@ -18,8 +20,9 @@ def signUpPage(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            Profile.objects.create(user=form)
+            new_user = form.save()
+            new_user.save()
+            Profile.objects.create(user=new_user)
             messages.success(request, 'Registration successful.')
             return redirect("blog:post_index")
         messages.error(
@@ -64,6 +67,7 @@ def loginPage(request):
     })
 
 
+@login_required
 def dashboard_view(request):
     user = request.user
     return render(request, 'pages/dashboard.html', {
@@ -87,6 +91,7 @@ def user_edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            return redirect("blog:post_index")
 
     user_form = UserEditForm(instance=request.user)
     profile_form = ProfileEditForm(
@@ -95,3 +100,24 @@ def user_edit(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+
+class EditUserView(LoginRequiredMixin, View):
+    def get(self, request):
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(
+            instance=request.user.profile)
+        return render(request, 'account/profile_edit.html', {
+            'user_form': user_form,
+            'profile_form': profile_form
+        })
+
+    def post(self, request):
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(
+            instance=request.user.profile, data=request.POST, files=request.FILES)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect("blog:post_index")
