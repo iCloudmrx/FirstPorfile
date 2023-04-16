@@ -25,3 +25,17 @@ class CategoryAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'message']
     list_filter = ['name', 'email']
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['user', 'body', 'created_time', 'active']
+    list_filter = ['active', 'created_time', 'user']
+    search_fields = ['user', 'body']
+    actions = ['disable_comments', 'activate_comments']
+
+    def disable_comments(self, request, queryset):
+        queryset.updated(active=False)
+
+    def activate_comments(self, request, queryset):
+        queryset.updated(active=True)
