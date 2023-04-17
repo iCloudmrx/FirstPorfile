@@ -70,13 +70,16 @@ def post_detail(request, year, month, day, post):
     comments = post1.comments.filter(active=True)
     new_comment = None
     if request.method == "POST":
-        comment_form = ContactForm(data=request.POST)
+        comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.post = post1
+            new_comment.news = post1
             new_comment.user = request.user
             new_comment.save()
+            print(new_comment)
             CommentForm()
+        else:
+            print("Error")
     form = CommentForm()
     return render(request,
                   'blog/post/pages/single_page.html',
