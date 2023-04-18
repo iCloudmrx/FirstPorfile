@@ -138,6 +138,13 @@
                             <li>
                                 <a href="{% url 'blog:contact' %}">Biz Bilan Aloq</a>
                             </li>
+                            {% comment %}
+                            <li>
+                                <form action="{% url 'blog:search_results' %}" method="get">
+                                    <input name="q" type="text" placeholder="Search..." />
+                                </form>
+                            </li>
+                            {% endcomment %}
                         </ul>
                     </div>
                 </nav>

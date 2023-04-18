@@ -15,7 +15,7 @@
             <div class="left_content">
                 <div class="single_page">
                     <ol class="breadcrumb">
-                        <li><a href="{{url 'blog:post_index'}}">Home</a></li>
+                        <li><a href="#">Home</a></li>
                         <li><a href="#">Xorij</a></li>
                         <li class="active">Mobile</li>
                     </ol>
@@ -24,6 +24,10 @@
                         <a href="#"><i class="fa fa-user"></i>Wpfreeware</a>
                         <span><i class="fa fa-calendar"></i>6:49 AM</span>
                         <a href="#"><i class="fa fa-tags"></i>Technology</a>
+                        <span>
+                            <i class="fa fa-eye" aria-hidden="true"> {{post.view_count}}</i>
+                        </span>
+                        <span> | izohlar soni: {{comment_count}} </span>
                     </div>
                     <div class="single_page_content">
                         <img class="img-center" src="{{post.image.url}}" alt="" />
@@ -41,6 +45,7 @@
                                                 <p class="fw-light mb-4 pb-2">
                                                     Foydalanuvchi tomdan yozilgan eng so'ngi izohlar
                                                 </p>
+                                                <span> | izohlar soni: {{comment_count}} </span>
 
                                                 {% for comment in comments %}
                                                 <div class="d-flex flex-start">

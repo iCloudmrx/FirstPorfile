@@ -28,7 +28,8 @@ class Post(models.Model):
     body = models.TextField()
     image = models.ImageField(upload_to='news/images')
     category = models.ForeignKey(Category,
-                                 on_delete=models.CASCADE)
+                                 on_delete=models.CASCADE,
+                                 related_name='blog_posts')
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

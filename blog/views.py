@@ -1,3 +1,5 @@
+from django.db.models import Q
+from msilib.schema import ListView
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.views.generic import TemplateView
@@ -67,7 +69,11 @@ def post_detail(request, year, month, day, post):
                               publish__month=month,
                               publish__day=day
                               )
+    context = {}
+    # hitcounter logic
+    # hit_count=get_hitcount_model().get_for_object(post1)
     comments = post1.comments.filter(active=True)
+    comment_count = comments.count()
     new_comment = None
     if request.method == "POST":
         comment_form = CommentForm(request.POST)
@@ -86,7 +92,7 @@ def post_detail(request, year, month, day, post):
                   {
                       'post': post1,
                       'comments': comments,
-                      'new_comment': new_comment,
+                      'comment_count': comment_count,
                       'comment_form': form
                   })
 
@@ -125,3 +131,37 @@ def admin_page(request):
     return render(request, 'admin/page.html', {
         'users': admin_users
     })
+
+
+# class SearchResultsView(ListView):
+#     model = Post
+#     template_name = 'blog/post/pages/search_page.html'
+
+#     def get_queryset(self):
+#         query = self.request.GET.get('q')
+#         object_list = Post.published.filter(
+#             Q(name__icontains=query | Q(state__icontains=query)))
+#         return object_list
+
+
+def searchposts(request):
+    if request.method == 'GET':
+        query = request.GET.get('q')
+
+        submitbutton = request.GET.get('submit')
+
+        if query is not None:
+            lookups = Q(title__icontains=query) | Q(content__icontains=query)
+
+            results = Post.objects.filter(lookups).distinct()
+
+            context = {'posts': results,
+                       'submitbutton': submitbutton}
+
+            return render(request, 'blog/post/pages/search_page.html', context)
+
+        else:
+            return render(request, 'blog/post/pages/search_page.html')
+
+    else:
+        return render(request, 'blog/post/pages/search_page.html')
