@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts',
-    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -111,19 +110,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'uz-uz'
 
-LOCALE_PATHS = [
-    BASE_DIR/'locale'
-]
 
-LANGUAGES = [
-    ('uz', _('Uzbek')),
-    ('en', _('English')),
-    ('ru', _('Russian')),
-]
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+# LANGUAGES = [
+#     ('uz', _('Uzbek')),
+#     ('en', _('English')),
+#     ('ru', _('Russian')),
+# ]
+# MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
 
-MODELTRANSLATION_LANGUAGES = ('uz', 'en', 'ru')
-
+# TRANSLATABLE_MODEL_MODULES = ['blog.models', 'accounts.models']
 
 TIME_ZONE = 'Asia/Tashkent'
 

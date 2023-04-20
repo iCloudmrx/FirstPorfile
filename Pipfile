@@ -6,8 +6,6 @@ name = "pypi"
 [packages]
 django = "*"
 pillow = "*"
-modeltranslation = "*"
-django-modeltranslation = "*"
 django-hitcount = "*"
 
 [dev-packages]

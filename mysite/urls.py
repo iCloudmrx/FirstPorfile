@@ -24,10 +24,16 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('account/', include('accounts.urls')),
 ]
+# +i18n_patterns(
+#     path('i18n/', include('django.conf.urls.i18n')),
+#     path('', include('blog.urls')),
+#     path('account/', include('accounts.urls')),
+# )
 
-urlpatterns = [
-    *i18n_patterns(*urlpatterns, prefix_default_language=False),
-]
+
+# urlpatterns = [
+#     *i18n_patterns(*urlpatterns, prefix_default_language=False),
+# ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

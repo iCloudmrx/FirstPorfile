@@ -1,5 +1,5 @@
 {% load static %}
-{% load i18n %}
+{% comment %} {% load i18n %} {% endcomment %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,7 +41,7 @@
                                     <li>
                                         <a href="{% url 'blog:contact' %}">Contact</a>
                                     </li>
-                                    <li>
+                                    {% comment %} <li>
 <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}">
     <select name="language">
@@ -56,7 +56,7 @@
     </select>
     <input type="submit" value="Go">
 </form>
-                                    </li>
+                                    </li> {% endcomment %}
                                 </ul>
                             </div>
                             <div class="header_top_right">
