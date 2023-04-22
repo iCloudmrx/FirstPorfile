@@ -153,4 +153,9 @@ LOGIN_URL = ' accounts:login'
 
 LOGOUT_REDIRECT_URL = 'blog:post_index'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.mailgun.org"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "postmaster@sandboxd06d0ff4069f4fb7bb265cf3aa39c04a.mailgun.org"
+EMAIL_HOST_PASSWORD = "e9567cb5a846c2b8608e2d174351c260-181449aa-50783913"
+EMAIL_USE_TLS = True
