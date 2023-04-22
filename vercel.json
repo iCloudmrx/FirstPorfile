@@ -24,7 +24,7 @@
         },
         {
             "src": "/(.*)",
-            "use": "poll/wsgi.py"
+            "dest": "poll/wsgi.py"
         }
     ]
 }
