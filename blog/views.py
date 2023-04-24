@@ -8,6 +8,9 @@ from .models import Post, Category
 from .forms import ContactForm, CommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
+from hitcount.views import HitCountDetailView
+from hitcount.utils import get_hitcount_model
+from hitcount.models import HitCountMixin
 
 # Create your views here.
 
@@ -61,6 +64,11 @@ def post_404(request):
                   'blog/post/pages/404.html')
 
 
+class PostHitCountDetailView(HitCountDetailView):
+    model = Post
+    count_hit = True
+
+
 def post_detail(request, year, month, day, post):
     post1 = get_object_or_404(Post,
                               status=Post.Status.Published,
@@ -71,7 +79,11 @@ def post_detail(request, year, month, day, post):
                               )
     context = {}
     # hitcounter logic
-    # hit_count=get_hitcount_model().get_for_object(post1)
+    hit_count = get_hitcount_model().get_for_object(post1)
+    hits = hit_count.hits
+    hit_count_respone = HitCountMixin.hit_count(request, hit_count)
+    if hit_count_respone.hit_counted:
+        hits = +1
     comments = post1.comments.filter(active=True)
     comment_count = comments.count()
     new_comment = None
@@ -93,7 +105,8 @@ def post_detail(request, year, month, day, post):
                       'post': post1,
                       'comments': comments,
                       'comment_count': comment_count,
-                      'comment_form': form
+                      'comment_form': form,
+                      'hits': hits
                   })
 
 
